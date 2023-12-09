@@ -7,7 +7,7 @@ epochs_1st: 50 # number of epochs for first stage training (pre-training)
 epochs_2nd: 30 # number of peochs for second stage training (joint training)
 batch_size: 4
 max_len: 400 # maximum number of frames
-pretrained_model: "Models/LibriTTS/epochs_2nd_00020.pth"
+pretrained_model: ""
 second_stage_load_pretrained: true # set to true if the pre-trained model is for 2nd stage
 load_only_params: false # set to true if do not want to load epoch numbers and optimizer parameters
 
@@ -31,7 +31,7 @@ preprocess_params:
     hop_length: 300
 
 model_params:
-  multispeaker: false
+  multispeaker: true
 
   dim_in: 64 
   hidden_dim: 512

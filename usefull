@@ -1,0 +1,11 @@
+accelerate launch train_first.py --config_path src/configs/my_config.yml
+python train_second.py --config_path src/configs/config_ft.yml
+python train_finetune.py --config_path Configs/config_ft.yml
+accelerate launch --mixed_precision=fp16 train_finetune_accelerate.py --config_path src/configs/
+
+
+ssh -p 46851 root@i-2.gpushare.com
+scp -P 46851
+
+export https_proxy=http://guest:guest@i.wantmake.love:7893 http_proxy=http://guest:guest@i.wantmake.love:7893 all_proxy=socks5://guest:guest@i.wantmake.love:7893
+unset all_proxy http_proxy https_proxy

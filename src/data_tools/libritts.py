@@ -4,6 +4,7 @@ from typing import List
 import soundfile as sf
 from shutil import copyfile
 import phonemizer
+import librosa
 from nltk.tokenize import word_tokenize
 from text_utils import TextCleaner
 
@@ -53,14 +54,12 @@ def chapter(ori_path: str, des_path: str, pid: str):
         save_path, txt = audio(p, des_chapter_path)
         if save_path:
             ps = global_phonemizer.phonemize([txt])
-            ps2 = word_tokenize(ps[0])
-            ps2 = " ".join(ps2)
-
-            tokens = textclenaer(ps2)
-            tokens.insert(0, 0)
+            # ps2 = word_tokenize(ps[0])
+            # ps2 = " ".join(ps2)
+            # ps3 = textclenaer(ps2)
 
             sub_path = "/".join(save_path.split("/")[-5:])
-            out.append((sub_path, ps2, pid))
+            out.append((sub_path, ps[0], pid))
     return out
 
 
@@ -110,7 +109,7 @@ def _check_duration(wav, sr: int) -> bool:
 
 
 def run_train():
-    run(os.path.join(root_path, DataSetName.tc100))
+    run(DataSetName.tc100, DataSetName.tc460, "train.lst")
 
 
 def run_dev():
@@ -119,5 +118,5 @@ def run_dev():
 
 if __name__ == "__main__":
     root_path = "/mnt/d4t/data/LibriTTS/LibriTTS"
-    run_dev()
-    # run(os.path.join(root_path, "train-clean-360"))
+    run_train()
+    # run_dev()
