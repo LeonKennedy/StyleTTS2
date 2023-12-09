@@ -4,8 +4,18 @@ python train_finetune.py --config_path Configs/config_ft.yml
 accelerate launch --mixed_precision=fp16 train_finetune_accelerate.py --config_path src/configs/
 
 
-ssh -p 46851 root@i-2.gpushare.com
-scp -P 46851
+ssh -p 44919 root@i-2.gpushare.com
+scp -P 44919
+
 
 export https_proxy=http://guest:guest@i.wantmake.love:7893 http_proxy=http://guest:guest@i.wantmake.love:7893 all_proxy=socks5://guest:guest@i.wantmake.love:7893
 unset all_proxy http_proxy https_proxy
+
+1.
+git clone -b coffee https://github.com/LeonKennedy/StyleTTS2.git
+
+2.
+scp -P <> -r .cache/huggingface/hub/models--microsoft--wavlm-base-plus
+
+3.
+oss cp oss://LibriTTS/nltk_data.tar.gz .
